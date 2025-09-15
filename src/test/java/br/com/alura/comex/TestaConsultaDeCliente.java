@@ -5,6 +5,9 @@ package br.com.alura.comex;
 import java.sql.SQLException;
 import java.util.List;
 
+import br.com.alura.comex.dao.ClienteDao;
+import br.com.alura.comex.model.Cliente;
+
 public class TestaConsultaDeCliente {
 
     public static void main(String[] args) throws SQLException {

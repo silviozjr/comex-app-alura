@@ -2,6 +2,9 @@ package br.com.alura.comex;
 
 import java.util.List;
 
+import br.com.alura.comex.dao.CategoriaDao;
+import br.com.alura.comex.model.Categoria;
+
 public class TestaConsultaDeCategoria {
 
     public static void main(String[] args) {

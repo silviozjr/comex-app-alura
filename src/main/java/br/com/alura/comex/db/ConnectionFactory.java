@@ -7,11 +7,11 @@ import java.sql.SQLException;
 public class ConnectionFactory {
 
     public Connection criaConexao() {
-        String usuario = "sa";
-        String senha = "";
+        String usuario = "admin";
+        String senha = "admin";
 
         try {
-            String url = "jdbc:h2:./comex;;DB_CLOSE_ON_EXIT=FALSE;"
+            String url = "jdbc:postgresql://localhost:5432/comex"
                     //   + "INIT=runscript from './schema.sql'\\;"
                     //   + "runscript from './data.sql'"
                     ;

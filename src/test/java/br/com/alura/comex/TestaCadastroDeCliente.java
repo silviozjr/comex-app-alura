@@ -2,6 +2,9 @@ package br.com.alura.comex;
 
 import java.util.List;
 
+import br.com.alura.comex.dao.ClienteDao;
+import br.com.alura.comex.model.Cliente;
+
 public class TestaCadastroDeCliente {
 
     public static void main(String[] args) {

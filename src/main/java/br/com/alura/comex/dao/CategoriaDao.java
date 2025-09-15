@@ -1,5 +1,7 @@
 package br.com.alura.comex.dao;
 
+import br.com.alura.comex.db.ConnectionFactory;
+import br.com.alura.comex.db.DatabaseUtils;
 import br.com.alura.comex.model.Categoria;
 
 import java.sql.*;
@@ -15,7 +17,7 @@ public class CategoriaDao {
     }
 
     public List<Categoria> listaTodos() {
-        String sql = "select * from categorias";
+        String sql = "select * from categoria";
 
         try (PreparedStatement comando = conexao.prepareStatement(sql)) {
             ResultSet resultSet = comando.executeQuery();
@@ -36,15 +38,17 @@ public class CategoriaDao {
         Categoria categoria = new Categoria();
         categoria.setId(resultSet.getLong("id"));
         categoria.setNome(resultSet.getString("nome"));
+        categoria.setAtivo(resultSet.getBoolean("ativo"));
 
         return categoria;
     }
 
     public void cadastra(Categoria categoria) {
-        String sql = "insert into categoria (nome) values (?)";
+        String sql = "insert into categoria (nome, ativo) values (?, ?)";
 
         try (PreparedStatement comando = conexao.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
-            comando.setString(5, categoria.getNome());
+            comando.setString(1, categoria.getNome());
+            comando.setBoolean(2, categoria.isAtivo());
 
             comando.execute();
 
