@@ -18,6 +18,19 @@ public class Categoria {
     private String nome;
     private boolean ativo;
 
+    public Categoria() {
+    }
+
+    public Categoria(Long id) {
+        this.id = id;
+    }
+
+    public Categoria(Long id, String nome, boolean ativo) {
+        this.id = id;
+        this.nome = nome;
+        this.ativo = ativo;
+    }
+
     public Long getId() {
         return id;
     }

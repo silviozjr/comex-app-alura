@@ -18,12 +18,13 @@ public class ProdutoDao {
     }
 
     public void cadastra(Produto produto) {
-        String sql = "insert into produto (nome, descricao, preco) values (?, ?, ?)";
+        String sql = "insert into produto (nome, descricao, preco, qtd_estoque) values (?, ?, ?, ?)";
 
         try (PreparedStatement comando = conexao.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             comando.setString(1, produto.getNome());
             comando.setString(2, produto.getDescricao());
             comando.setDouble(3, produto.getPreco());
+            comando.setDouble(4, produto.getQtdEstoque());
 
             comando.execute();
             Long idGerado = DatabaseUtils.recuperaIdGerado(comando);
@@ -70,7 +71,9 @@ public class ProdutoDao {
 
     public List<Produto> listaTodos() {
         String sql = """
-                select produto.*, categoria.*
+                select produto.id as prod_id, produto.nome as prod_nome, produto.descricao as prod_descricao,
+                       produto.preco as prod_preco, produto.qtd_estoque as prod_qtd_estoque,
+                       categoria.id as cat_id, categoria.ativo as cat_ativo, categoria.nome as cat_nome
                   from produto
                   left join categoria_produto on produto.id = categoria_produto.produto_id
                   left join categoria on categoria_produto.categoria_id = categoria.id
@@ -83,14 +86,14 @@ public class ProdutoDao {
             Produto produto = null;
 
             while (resultSet.next()) {
-                Long produtoId = resultSet.getLong("produtos.id");
+                Long produtoId = resultSet.getLong("prod_id");
 
                 if (produto == null || !produto.getId().equals(produtoId)) {
                     produto = montaProduto(resultSet);
                     produtos.add(produto);
                 }
 
-                Long categoriaId = resultSet.getLong("categoria.id");
+                Long categoriaId = resultSet.getLong("cat_id");
                 if (!resultSet.wasNull()) {
                     Categoria categoria = monta(categoriaId, resultSet);
 
@@ -168,17 +171,19 @@ public class ProdutoDao {
     private Categoria monta(Long categoriaId, ResultSet resultSet) throws SQLException {
         Categoria categoria = new Categoria();
         categoria.setId(categoriaId);
-        categoria.setNome(resultSet.getString("categoria.nome"));
+        categoria.setNome(resultSet.getString("cat_nome"));
+        categoria.setAtivo(resultSet.getBoolean("cat_ativo"));
 
         return categoria;
     }
 
     private Produto montaProduto(ResultSet resultSet) throws SQLException {
         Produto produto = new Produto();
-        produto.setId(resultSet.getLong("produto.id"));
-        produto.setNome(resultSet.getString("produto.nome"));
-        produto.setDescricao(resultSet.getString("produto.descricao"));
-        produto.setPreco(resultSet.getDouble("produto.preco"));
+        produto.setId(resultSet.getLong("prod_id"));
+        produto.setNome(resultSet.getString("prod_nome"));
+        produto.setDescricao(resultSet.getString("prod_descricao"));
+        produto.setPreco(resultSet.getDouble("prod_preco"));
+        produto.setQtdEstoque(resultSet.getDouble("prod_qtd_estoque"));
 
         return produto;
     }
