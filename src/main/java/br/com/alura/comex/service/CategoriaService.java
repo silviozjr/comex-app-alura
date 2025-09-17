@@ -10,15 +10,19 @@ import br.com.alura.comex.model.Categoria;
 @Service
 public class CategoriaService {
 
-  public void cadastrar(Categoria categoria) {
+  private final CategoriaDao repositorio;
+
+  public CategoriaService(CategoriaDao categoriaDao) {
+    this.repositorio = categoriaDao;
+  }
+
+  public void cadastrar(Categoria categoria) {    
     categoria.setAtivo(true);
-    CategoriaDao dao = new CategoriaDao();
-    dao.cadastra(categoria);
+    repositorio.save(categoria);
   }
 
   public List<Categoria> listarTodos() {
-    CategoriaDao dao = new CategoriaDao();
-    return dao.listaTodos();
+    return repositorio.findAll();
   }
 
 }
