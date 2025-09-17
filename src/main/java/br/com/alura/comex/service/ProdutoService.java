@@ -6,18 +6,24 @@ import org.springframework.stereotype.Service;
 
 import br.com.alura.comex.dao.ProdutoDao;
 import br.com.alura.comex.model.Produto;
+import jakarta.transaction.Transactional;
 
 @Service
 public class ProdutoService {
 
+  private final ProdutoDao repositorio;
+
+  public ProdutoService(ProdutoDao produtoDao) {
+    this.repositorio = produtoDao;
+  }
+
+  @Transactional
   public void cadastrar(Produto produto) {
-    ProdutoDao dao = new ProdutoDao();
-    dao.cadastra(produto);
+    repositorio.save(produto);
   }
 
   public List<Produto> listarTodos() {
-    ProdutoDao dao = new ProdutoDao();
-    return dao.listaTodos();
+    return repositorio.findAll();
   }
 
 }

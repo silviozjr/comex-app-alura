@@ -9,21 +9,21 @@ import br.com.alura.comex.model.Produto;
 public class TestaConsultaDeProduto {
 
     public static void main(String[] args) {
-        ProdutoDao produtoDao = new ProdutoDao();
-        List<Produto> produtos = produtoDao.listaTodos();
+        // ProdutoDao produtoDao = new ProdutoDao();
+        // List<Produto> produtos = produtoDao.listaTodos();
 
-        for (Produto produto : produtos) {
-            System.out.println("ID: " + produto.getId());
-            System.out.println("NOME: " + produto.getNome());
+        // for (Produto produto : produtos) {
+        //     System.out.println("ID: " + produto.getId());
+        //     System.out.println("NOME: " + produto.getNome());
 
-            System.out.println("CATEGORIAS:");
-            for (Categoria categoria : produto.getCategorias()) {
-                System.out.println("  " + categoria.getId() + " => " + categoria.getNome());
-            }
+        //     System.out.println("CATEGORIAS:");
+        //     for (Categoria categoria : produto.getCategorias()) {
+        //         System.out.println("  " + categoria.getId() + " => " + categoria.getNome());
+        //     }
 
-            System.out.println("========================================");
-            System.out.println();
-        }
+        //     System.out.println("========================================");
+        //     System.out.println();
+        // }
 
     }
 }
