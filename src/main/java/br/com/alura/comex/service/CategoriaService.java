@@ -4,16 +4,16 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import br.com.alura.comex.dao.CategoriaDao;
 import br.com.alura.comex.model.Categoria;
+import br.com.alura.comex.repository.CategoriaRepository;
 
 @Service
 public class CategoriaService {
 
-  private final CategoriaDao repositorio;
+  private final CategoriaRepository repositorio;
 
-  public CategoriaService(CategoriaDao categoriaDao) {
-    this.repositorio = categoriaDao;
+  public CategoriaService(CategoriaRepository categoriaRepository) {
+    this.repositorio = categoriaRepository;
   }
 
   public void cadastrar(Categoria categoria) {    

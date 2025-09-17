@@ -1,7 +1,7 @@
 package br.com.alura.comex;
 
-import br.com.alura.comex.dao.CategoriaDao;
 import br.com.alura.comex.model.Categoria;
+import br.com.alura.comex.repository.CategoriaRepository;
 
 public class TestaCadastroDeCategoria {
 

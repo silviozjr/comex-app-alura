@@ -4,17 +4,17 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import br.com.alura.comex.dao.ProdutoDao;
 import br.com.alura.comex.model.Produto;
+import br.com.alura.comex.repository.ProdutoRepository;
 import jakarta.transaction.Transactional;
 
 @Service
 public class ProdutoService {
 
-  private final ProdutoDao repositorio;
+  private final ProdutoRepository repositorio;
 
-  public ProdutoService(ProdutoDao produtoDao) {
-    this.repositorio = produtoDao;
+  public ProdutoService(ProdutoRepository produtoRepository) {
+    this.repositorio = produtoRepository;
   }
 
   @Transactional

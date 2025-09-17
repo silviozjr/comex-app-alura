@@ -2,9 +2,9 @@ package br.com.alura.comex;
 
 import java.util.List;
 
-import br.com.alura.comex.dao.ProdutoDao;
 import br.com.alura.comex.model.Categoria;
 import br.com.alura.comex.model.Produto;
+import br.com.alura.comex.repository.ProdutoRepository;
 
 public class TestaConsultaDeProduto {
 
